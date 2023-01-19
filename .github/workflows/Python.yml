@@ -38,4 +38,4 @@ jobs:
       with:
         tag_name: RP5.1.0
         files: |
-          *
+          /home/runner/work/DotCS/*
