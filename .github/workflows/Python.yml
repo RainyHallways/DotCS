@@ -38,7 +38,7 @@ jobs:
         
     - name: Provide release version
       id: release_version
-      run: echo "release_version=$(cat build/version)"  >> $GITHUB_OUTPUT
+      run: echo "release_version=$(cat version)"  >> $GITHUB_OUTPUT
 
     - name: Release
       uses: softprops/action-gh-release@v0.1.14
@@ -47,4 +47,5 @@ jobs:
       with:
         tag_name: RP${{ steps.release_version.outputs.release_version }}
         files: |
+          DotCS_community
           all.tar.gz
