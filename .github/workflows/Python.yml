@@ -7,6 +7,7 @@ on:
   push:
     branches: [ "main" ]
     paths:
+      - "version"
       - "__init__.py"
   workflow_dispatch: {}
 
@@ -31,11 +32,19 @@ jobs:
         pyinstaller -F ./__init__.py
         cp ./dist/__init__ DotCS_community
 
+    - name: Archive binaries
+      run: |
+        tar -czf all.tar.gz /home/runner/work/DotCS/
+        
+    - name: Provide release version
+      id: release_version
+      run: echo "release_version=$(cat build/version)"  >> $GITHUB_OUTPUT
+
     - name: Release
       uses: softprops/action-gh-release@v0.1.14
       env:
         GITHUB_TOKEN: ${{ secrets.TOKEN }}
       with:
-        tag_name: RP5.1.0
+        tag_name: RP${{ steps.release_version.outputs.release_version }}
         files: |
-          /home/runner/work/DotCS/*
+          all.tar.gz
