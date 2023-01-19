@@ -34,7 +34,7 @@ jobs:
 
     - name: Archive binaries
       run: |
-        tar -czf all.tar.gz /home/runner/work/DotCS
+        tar -czf all.tar.gz /home/runner/work/DotCS/DotCS
         
     - name: Provide release version
       id: release_version
